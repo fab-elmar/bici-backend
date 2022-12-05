@@ -10,6 +10,7 @@ const MapSchema = new mongoose.Schema(
             ref: "User",
             path: ""
         },
+        title: { type: String, default: "This pin needs a title" },
         camping: { type: Boolean, default: false },
         description: { type: String },
         location: {
