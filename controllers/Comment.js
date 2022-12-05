@@ -3,6 +3,7 @@ import Comment from "../DB/Comment.js"
 import SetPin from "../DB/mapDB.js"
 
 async function getAllComments(request, response) {
+    console.log('comment', request.body)
     const pin_id = mongoose.Types.ObjectId(request.body.pin_id)
     const pin_data = await SetPin.find({ _id: pin_id })
     try {

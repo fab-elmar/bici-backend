@@ -31,7 +31,7 @@ export const editMapPin = async (req, res) => {
                 },
                 events: req.body.events,
                 host: req.body.host,
-                reapir: req.body.reapir,
+                repair: req.body.repair,
                 shower: req.body.shower,
                 swim: req.body.swim,
                 pin_imgs: req.files.map(e => ({
@@ -72,7 +72,7 @@ export const editMapPin = async (req, res) => {
 
 
 export const getPins = async (req, res) => {
-
+    console.log(req.body.filter)
     const northEastArr = geoToArr(req.body.bou._northEast)
     const southWestArr = geoToArr(req.body.bou._southWest)
     console.log('North', northEastArr, 'South', southWestArr, req.body.filter)
@@ -98,39 +98,3 @@ export const getPins = async (req, res) => {
 
 
 }
-
-/* 
-export const getUserProfile = async (req, res) => {
-    if (req.token?.id) {
-        try {
-            const userId = mongoose.Types.ObjectId(req.token.id);
-            const user = await UserProfile.findOne({ user: userId })
-            //console.log('foundUser', user)
-            if (!user) {
-                res.status(404).send({
-                    message: "getUserProfile> User not found",
-                    success: false,
-                    data: user,
-                })
-            } else {
-                res.status(200).send({
-                    message: "getUserProfile> User found",
-                    success: true,
-                    data: user,
-                })
-            }
-        } catch (error) {
-            res.status(400).send({
-                message: error.message,
-                success: false,
-                data: error,
-            })
-        }
-    } else {
-        res.status(401).send({
-            message: "UserProfile> You are not logged in",
-            success: false,
-        })
-    }
-}
- */

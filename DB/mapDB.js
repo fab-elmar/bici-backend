@@ -28,7 +28,7 @@ const MapSchema = new mongoose.Schema(
         },
         events: { type: Boolean, default: false },
         host: { type: Boolean, default: false },
-        reapir: { type: Boolean, default: false },
+        repair: { type: Boolean, default: false },
         shower: { type: Boolean, default: false },
         swim: { type: Boolean, default: false },
         pin_imgs: [{
@@ -45,7 +45,7 @@ MapSchema.pre("find", function () {
 
 MapSchema.index({ location: "2dsphere" });
 
-const SetPin = mongoose.model("TEST", MapSchema);
+const SetPin = mongoose.model("mapPin", MapSchema);
 
 export default SetPin
 
