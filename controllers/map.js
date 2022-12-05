@@ -12,6 +12,7 @@ export const editMapPin = async (req, res) => {
         })
     }
     try {
+        console.log("location", req.body.location)
         const userId = mongoose.Types.ObjectId(req.token.id);
         const coordinates = [parseFloat(transform(req.body.location)[0]), parseFloat(transform(req.body.location)[1])]
 
@@ -72,14 +73,12 @@ export const editMapPin = async (req, res) => {
 
 
 export const getPins = async (req, res) => {
-    console.log(req.body.filter)
+    console.log("GET PINS BODY", req.body)
+    console.log(Math.random())
     const northEastArr = geoToArr(req.body.bou._northEast)
     const southWestArr = geoToArr(req.body.bou._southWest)
-    console.log('North', northEastArr, 'South', southWestArr, req.body.filter)
+    console.log('North', northEastArr, 'South', southWestArr)
     SetPin.find({
-        // ...req.body.filter,
-        //$and example for filtering
-
         location: {
             $geoWithin: {
                 $box:
@@ -87,14 +86,10 @@ export const getPins = async (req, res) => {
                         northEastArr,
                         southWestArr
                     ]
-
             }
         },
-
     }, (error, results) => {
         if (error) console.log(error);
         res.json(results);
     });
-
-
 }

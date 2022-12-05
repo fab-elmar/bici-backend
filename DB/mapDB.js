@@ -45,9 +45,13 @@ MapSchema.pre("find", function () {
 
 MapSchema.index({ location: "2dsphere" });
 
+<<<<<<< HEAD
 const SetPin = mongoose.model("mapPin", MapSchema);
+=======
+const Mappin = mongoose.model("mappin", MapSchema);
+>>>>>>> 41aa54829eadcd16de83301a025cd333ef7cdfb8
 
-export default SetPin
+export default Mappin
 
 
 // var message = new SetPin({
