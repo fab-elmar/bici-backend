@@ -18,7 +18,7 @@ const ProfileSchema = new mongoose.Schema(
         privacy: { type: Boolean, default: true },
         role: { type: String, default: "User" },
         avatar_img: {
-            aws_url: { type: String, default: "https://placeimg.com/80/80/people" },
+            aws_url: { type: String, default: "https://biciappimages.s3.eu-central-1.amazonaws.com/avatar_images/Portrait_Placeholder.png" },
             aws_name: { type: String }
         }
     },
