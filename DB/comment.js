@@ -5,7 +5,12 @@ const CommentsSchema = new mongoose.Schema(
         user: {
             required: true,
             type: mongoose.Schema.Types.ObjectId,
-            ref: "User",
+            ref: "User"
+        },
+        userprofile: {
+            required: true,
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "UserProfile"
         },
         comment: {
             required: true,
@@ -20,7 +25,8 @@ const CommentsSchema = new mongoose.Schema(
 )
 
 CommentsSchema.pre("find", function () {
-    this.populate("user")
+    this.populate("userprofile")
+    // this.populate("userprofile")
 })
 
 const Comment = mongoose.model("Comment", CommentsSchema)
