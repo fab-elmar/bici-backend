@@ -9,12 +9,12 @@ const MapSchema = new mongoose.Schema(
       path: "",
     },
     title: { type: String, default: "This pin needs a title" },
-    rating: {
-      required: true,
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Rating",
-      path: "",
-    },
+    // rating: {
+    //   required: true,
+    //   type: mongoose.Schema.Types.ObjectId,
+    //   ref: "Rating",
+    //   path: "",
+    // },
     camping: { type: Boolean, default: false },
     description: { type: String },
     location: {
@@ -28,7 +28,7 @@ const MapSchema = new mongoose.Schema(
     swim: { type: Boolean, default: false },
     pin_imgs: [
       {
-        aws_url: { type: String },
+        aws_url: { type: String, default: "https://biciappimages.s3.eu-central-1.amazonaws.com/pin_images/Placeholder_view_vector.svg.png" },
         aws_name: { type: String },
       },
     ],
@@ -38,7 +38,7 @@ const MapSchema = new mongoose.Schema(
 
 MapSchema.pre("find", function () {
   this.populate("user");
-  this.populate("rating");
+  // this.populate("rating");
 });
 
 MapSchema.index({ location: "2dsphere" });
