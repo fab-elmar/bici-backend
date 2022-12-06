@@ -1,5 +1,5 @@
 import express from "express";
-import { createPinRating, getPinRating } from "../controllers/rating";
+import { createPinRating, getPinRating } from "../controllers/rating.js";
 
 const router = express.Router();
 

@@ -1,4 +1,4 @@
-import Rating from "../DB/rating";
+import Rating from "../DB/rating.js";
 import mongoose from "mongoose";
 
 export async function createPinRating(request, response) {
