@@ -11,27 +11,7 @@ export async function createPinRating(request, response) {
         }
     })
     console.log("FOundPin", foundPin)
-    if (!foundPin) {
-        try {
-            const newRating = await Rating.create({
-                user: user,
-                item: {
-                    refId: request.body.pinId,
-                    category: "MapPin"
-                },
-                ratingValue: request.body.ratingValue
-            })
-            return response.send({
-                message: "rating succesful",
-                success: true,
-            })
-        } catch (error) {
-            return response.send({
-                message: "rating failed",
-                success: false,
-            })
-        }
-    } else {
+    if (foundPin[0]) {
         try {
             const updateExisting = await foundPin[0].updateOne({ ratingValue: request.body.ratingValue }, { new: true }, (err, data) => {
                 if (err) {
@@ -53,12 +33,36 @@ export async function createPinRating(request, response) {
             return response.send({
                 message: "rating updated succesfully",
                 success: true,
+                data: updateExisting
             })
         } catch (error) {
             console.log(error.message)
             return response.send({
                 message: "updating current rating failed",
                 success: false,
+                data: error
+            })
+        }
+    } else {
+        try {
+            const newRating = await Rating.create({
+                user: request.token.id,
+                item: {
+                    refId: request.body.pinId,
+                    category: "MapPin"
+                },
+                ratingValue: request.body.ratingValue
+            })
+            return response.send({
+                message: "rating succesful",
+                success: true,
+                data: newRating
+            })
+        } catch (error) {
+            return response.send({
+                message: "rating failed",
+                success: false,
+                data: error
             })
         }
     }
