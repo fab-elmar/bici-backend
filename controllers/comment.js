@@ -9,6 +9,7 @@ async function getPinComments(request, response) {
       const pinComments = await Comment.find({
         pin_id: request.body.pinId,
       });
+      console.log("pinComments", pinComments);
       return response.send({
         message: "comments found for pin",
         success: true,
