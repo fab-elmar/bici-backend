@@ -3,13 +3,13 @@ import "dotenv/config";
 import connectToDB from "./DB/mongoConnection.js";
 import cors from "cors";
 //import messageRouter from "./routes/Message"
-import userRouter from "./routes/User.js";
-import profileRouter from "./routes/UserProfile.js";
+import userRouter from "./routes/user.js";
+import profileRouter from "./routes/userProfile.js";
 import * as jwt from "./utilities/jwt.js";
 import chalk from "chalk";
 import mapRouter from "./routes/map.js";
 import commentRouter from "./routes/comment.js";
-import ratingRouter from "./routes/Rating.js";
+import ratingRouter from "./routes/rating.js";
 
 const app = express();
 const PORT = process.env.PORT || 8081;
