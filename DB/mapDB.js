@@ -11,6 +11,12 @@ const MapSchema = new mongoose.Schema(
             path: ""
         },
         title: { type: String, default: "This pin needs a title" },
+        rating: {
+            required: true,
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Rating",
+            path: ""
+        },
         camping: { type: Boolean, default: false },
         description: { type: String },
         location: {
@@ -32,6 +38,7 @@ const MapSchema = new mongoose.Schema(
 
 MapSchema.pre("find", function () {
     this.populate("user")
+    this.populate("rating")
 })
 
 MapSchema.index({ location: "2dsphere" });
