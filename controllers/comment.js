@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 import Comment from "../DB/comment.js";
-import SetPin from "../DB/mapDB.js";
+
+import UserProfile from "../DB/userProfile.js";
 
 async function getPinComments(request, response) {
   console.log("PINID in GET Comments", request.body.pinId);
@@ -26,29 +27,33 @@ async function getPinComments(request, response) {
 
 async function createComment(request, response) {
   console.log("comment", request.body);
+  const userId = mongoose.Types.ObjectId(request.token.id);
+  const userProfile = await UserProfile.find({
+    user: request.token.id,
+  });
+  console.log("userProfile", userProfile);
+  // console.log("userID", userId)
   try {
-    await Comment.create({
+    const newComment = await Comment.create({
       user: request.token.id,
+      userprofile: userProfile[0]._id,
       comment: request.body.comment,
       pin_id: request.body.pin_id,
     });
     return response.send({
       message: "commenting succesful",
       success: true,
+      data: newComment,
     });
   } catch (error) {
     return response.send({
       message: "commenting failed",
       success: false,
+      data: error,
     });
   }
 }
-/* 
-async function deleteComment(request, response) {
-    const commment = await Comment.findByIdAndDelete(request.params.id)
-    response.json(commment)
-}
-*/
+
 const CommentController = {
   getPinComments,
   createComment,
