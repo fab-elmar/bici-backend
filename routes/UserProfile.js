@@ -1,5 +1,6 @@
 import express from "express"
 const router = express.Router()
+import { getProPin } from "../controllers/dashboard.js"
 import {
     getUserProfile,
     editUserProfile,
@@ -75,6 +76,11 @@ router
     .route("/edit")
     .post(upload.single('avatar_img'),
         editUserProfile)
+
+
+router
+    .route("/propin")
+    .get(getProPin)
 
 export default router
 

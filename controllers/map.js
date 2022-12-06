@@ -25,6 +25,7 @@ export const editMapPin = async (req, res) => {
             await SetPin.create({
                 user: userId,
                 camping: req.body.camping,
+                title: req.body.title,
                 description: req.body.description,
                 location: {
                     type: "Point",
